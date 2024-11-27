@@ -1,0 +1,51 @@
+<!-- base.htmlを引き継ぐ(extends) -->
+{% extends "base.html" %}
+{% block title %}Contact{% endblock title %}
+
+{% block contents %}
+<!-- Main Content-->
+<br>
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-primary">ご入力内容を送信してください</h2>
+                    <p class="text-muted">必要な情報をご記入のうえ、送信ボタンを押してください。</p>
+                </div>
+                {% if messages %}
+                <ul class="list-unstyled" style="list-style: none;">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="my-5">
+                    <form method="post">
+                        <!-- csrf攻撃の対策 -->
+                        {% csrf_token %}
+
+                        <!-- forms.pyから取り出して表示 -->
+                        {% for field in form %}
+                            <div class="form-floating">
+                                <div class="form-group floating-label-form-group controls">
+                                    {{ field.label_tag}}
+                                    {{ field }}
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- ループはここまで -->
+                        <br>
+                        <!-- 送信用のボタン -->
+                        <!-- "submid"はformタグの間にデータを送信 -->
+                        <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock contents %}

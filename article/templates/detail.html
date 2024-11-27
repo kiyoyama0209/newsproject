@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+<!-- ヘッダー情報のページタイトルを設定する -->
+{% block title %}Article Detail{% endblock %}
+
+{% block contents %}
+<!-- メインコンテンツエリア -->
+<div class="container py-5">
+  <!-- 中央寄せカード -->
+  <div class="col-lg-12 col-md-12 mx-auto">
+    <!-- 記事カード -->
+    <div class="card shadow-lg border-0">
+      <!-- 写真ヘッダー -->
+      {% if object.image %}
+      <div class="card-img-top text-center">
+        <img src="{{ object.image.url }}" alt="Article Image" class="img-fluid rounded-top" style="max-height: 500px; object-fit: cover;">
+      </div>
+      {% endif %}
+      <!-- カードボディ -->
+      <div class="card-body px-5">
+        <!-- タイトル -->
+        <h2 class="card-title text-center text-uppercase text-primary mb-4 display-6 fw-bold">{{ object.title }}</h2>
+        <!-- コンテンツ -->
+        <p class="card-text text-muted fs-4">{{ object.content }}</p>
+        <!-- 投稿日時 -->
+        <div class="text-end mt-5">
+          <p class="text-secondary"><small>{{ object.posted_at }} に投稿</small></p>
+        </div>
+        <!-- 編集・削除ボタン -->
+        {% if request.user == object.user %}
+        <div class="text-end mt-3">
+          <a href="{% url 'article:article_edit' object.pk %}" class="btn btn-warning me-2">編集する</a>
+          <a href="{% url 'article:article_delete' object.pk %}" class="btn btn-danger">削除する</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

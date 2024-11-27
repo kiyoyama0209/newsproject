@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Post Success{% endblock %}
+
+  {% block contents %}
+    <br>
+      <div class="container">
+        <div class="row">
+          <div class="col offset-2">
+            <h4>投稿が完了しました!</h4>  
+            <div class="container">
+              <p class="float-end mb-1">
+                <a href="{% url "article:index" %}">Back to top</a>
+              </p>
+              <!-- フッターのテキストを任意のものに書き換え-->
+              <p class="mb-1">
+                Photo Gallery is &copy; Bootstrap, but please post a lot!</p>
+            </div>
+          </dv>
+        </dv>
+      </dv>
+    <br>
+  {% endblock %}

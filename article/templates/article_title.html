@@ -1,0 +1,30 @@
+{% load static %}
+    <!-- タイトルとナビゲーションボタン -->
+    <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <!-- タイトルと本文 -->
+                    <h2 class="text-white mb-4">News Post</h2>
+                        <p class="text-white-50">
+                        最新のニュースをお届けします！社会、経済、エンタメなど、あなたが気になる話題をチェックして、コメントやシェアであなたの意見を投稿してください。情報を共有して、みんなで最新のニュースを把握しましょう！」
+                        <p>
+                        <!-- ナビゲーションボタン -->
+                        {% if user.is_authenticated %}
+                        <!-- ログイン中のボタン -->
+                        <a href="{% url "article:post" %}"
+                            class="btn btn-primary my-2">投稿する</a>
+                        <a href="{% url "accounts:logout" %}"
+                            class="btn btn-secondary my-2">ログアウト</a>
+                        {% else %}
+                        <!-- ログイン状態ではない場合のボタン -->
+                        <a href="{% url 'accounts:signup' %}"
+                            class="btn btn-primary my-2">今すぐサインアップ</a>
+                        <a href="{% url "accounts:login" %}"                            class="btn btn-secondary my-2">登録済みの方はログイン</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <img class='img-fluid' src='{% static "assets\img\ipad.png" %}'/>
+        </div>
+    </section>
